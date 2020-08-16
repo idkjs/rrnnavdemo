@@ -1,0 +1,38 @@
+{
+  "name": "rrnnavdemo",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "npx react-native start",
+    "ios": "npx react-native run-ios",
+    "android": "npx react-native run-android",
+    "clean": "bsb -clean-world",
+    "watch": "bsb -clean-world -make-world -w",
+    "build": "bsb -clean-world -make-world",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "react": "16.13.1",
+    "react-native": "0.63.2",
+    "reason-react": "^0.9.1",
+    "reason-react-native": "^0.62.3"
+  },
+  "devDependencies": {
+    "bs-platform": "^8.2.0",
+    "@babel/core": "^7.8.4",
+    "@babel/runtime": "^7.8.4",
+    "@react-native-community/eslint-config": "^1.1.0",
+    "babel-jest": "^25.1.0",
+    "eslint": "^6.5.1",
+    "jest": "^25.1.0",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "react-test-renderer": "16.13.1"
+  },
+  "jest": {
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-(native|universal|navigation)-(.*)|@react-native-community/(.*)|@react-navigation/(.*)|bs-platform)"
+    ]
+  }
+}
