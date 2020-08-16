@@ -256,9 +256,29 @@ external dismissModal: string => unit = "dismissModal";
 external popToRoot: string => unit = "popToRoot";
 
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external registerComponent: (string, unit =>React.component('a)) => React.element =
+external registerComponent: (string, 'a) => React.element =
   "registerComponent";
+/* EVENTS */
+type events;
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external events: unit => events = "events";
+[@bs.send]
+external _registerAppLaunchedListener: events => (unit => unit) => unit = "registerAppLaunchedListener";
 
+let onAppLaunched =  (f: unit => unit) => events() -> _registerAppLaunchedListener(f);
+
+[@bs.deriving abstract]
+type layoutRoot = {
+    /**
+     * Set the root
+     */
+    [@bs.optional]
+    root: layoutStack,
+    // [@bs.optional]
+    // modals?: any,
+    // [@bs.optional]
+    // overlays?: any;
+};
 [@bs.deriving abstract]
 type rootOptions = {
   [@bs.optional]
@@ -266,7 +286,7 @@ type rootOptions = {
 };
 
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external setRoot: rootOptions => Js.Promise.t(unit) = "setRoot";
+external setRoot: ('a) => Js.Promise.t(unit) = "setRoot";
 
 type optionsModalPresentationStyle = [
   | `formSheet

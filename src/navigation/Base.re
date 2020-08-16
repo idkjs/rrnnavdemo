@@ -10,6 +10,9 @@ external registerScreenComponent: (string, unit =>React.component('a)) => React.
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
 external registerScreen: (string, React.element) => React.element =
   "registerComponent";
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external registerScreen: (string, 'a) => React.element =
+  "registerComponent";
 
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
 external setRoot: 'a => unit = "setRoot";
