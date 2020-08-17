@@ -1,69 +1,122 @@
-/**
- * @format
- */
-// import { AppRegistry } from "react-native";
-// import App from "./src/App.bs";
+// const { Navigation } = require('react-native-navigation');
+// const React = require('react');
+// const { View, Text, Button, StyleSheet } = require('react-native');
 
-// const APP_NAME = "rrnnavdemo";
+// const HomeScreen = (props) => {
+//   return (
+//     <View style={styles.root}>
+//       <Text>Hello React Native Navigation 👋</Text>
 
-// AppRegistry.registerComponent(APP_NAME, () => App);
-// In index.js of a new project
-const { Navigation } = require('react-native-navigation');
-const React = require('react');
-// const {default as App} = require("./App");
-// import App from "./App";
-// import App from "./src/Basic";
-// import "./src/Index.bs";
-const { View, Text, StyleSheet } = require('react-native');
+//       <Button
+//         title='Push Settings Screen'
+//         color='#710ce3'
+//         onPress={() => Navigation.push(props.componentId, {
+//           component: {
+//             name: 'Settings'
+//           }
+//         })} />
+//     </View>
+//   );
+// };
+// HomeScreen.options = {
+//   topBar: {
+//     title: {
+//       text: 'Home'
+//     }
+//   },
+//   bottomTab: {
+//     text: 'Home'
+//   }
+// };
 
-const HomeScreen = (props) => {
-    return (
-      <View style={styles.home}>
-        <Text>Hello React Native Navigation 👋</Text>
-      </View>
-    );
-  };
-  HomeScreen.options = {
-    topBar: {
-      title: {
-        text: 'Home',
-        color: 'white'
-      },
-      background: {
-        color: '#4d089a'
-      }
-    }
-  }
-Navigation.registerComponent('Home', () => HomeScreen);
+// const SettingsScreen = () => {
+//   return (
+//     <View style={styles.root}>
+//       <Text>Settings Screen</Text>
+//     </View>
+//   );
+// }
+// SettingsScreen.options = {
+//   topBar: {
+//     title: {
+//       text: 'Settings'
+//     }
+//   },
+//   bottomTab: {
+//     text: 'Settings'
+//   }
+// }
 
-Navigation.events().registerAppLaunchedListener(async () => {
-  Navigation.setRoot({
-    root: {
-      stack: {
-        children: [
-          {
-            component: {
-              name: 'Home'
-            }
-          }
-        ]
-      }
-    }
-  });
-});
+// Navigation.registerComponent('Home', () => HomeScreen);
+// Navigation.registerComponent('Settings', () => SettingsScreen);
 
-const styles = StyleSheet.create({
-  home: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'whitesmoke'
-  },
-  root: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'whitesmoke'
-  }
-});
+// Navigation.setDefaultOptions({
+//   statusBar: {
+//     backgroundColor: '#4d089a'
+//   },
+//   topBar: {
+//     title: {
+//       color: 'white'
+//     },
+//     backButton: {
+//       color: 'white'
+//     },
+//     background: {
+//       color: '#4d089a'
+//     }
+//   },
+//   bottomTab: {
+//     fontSize: 14,
+//     selectedFontSize: 14
+//   }
+// });
 
+// Navigation.events().registerAppLaunchedListener(async () => {
+//   Navigation.setRoot({
+//     root: {
+//       bottomTabs: {
+//         children: [
+//           {
+//             stack: {
+//               children: [
+//                 {
+//                   component: {
+//                     name: 'Home'
+//                   }
+//                 },
+//               ]
+//             }
+//           },
+//           {
+//             stack: {
+//               children: [
+//                 {
+//                   component: {
+//                     name: 'Settings'
+//                   }
+//                 }
+//               ]
+//             }
+//           }
+//         ]
+//       }
+//     }
+//   });
+// });
+
+// const styles = StyleSheet.create({
+//   root: {
+//     flex: 1,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     backgroundColor: 'whitesmoke'
+//   }
+// });
+
+// import 'src/Index.bs';
+
+import { AppRegistry } from 'react-native';
+import App from './src/Index.bs';
+import { name as appName } from './app.json';
+
+AppRegistry.registerComponent(appName, () => App);

@@ -1,4 +1,3 @@
-
 let root = {
   "root": {
     component: {
@@ -7,6 +6,10 @@ let root = {
   },
 };
 
-Screens.registerScreens();
+RegisterScreens.registerScreens();
 
-Base.onAppLaunched(() => {Base.setRoot(root)});
+Navigation.onAppLaunched(() => {
+  Navigation.setRoot(root)
+  |> Js.Promise.then_(_result => {Js.Promise.resolve()})
+  |> ignore
+});

@@ -9,7 +9,7 @@ let make = () => {
 let x = make;
 // let screen:React.element = make;
 let screen = Base.registerScreenComponent(screenId, () => make);
-let screen2 = Utils.createScreen(~screenId, ~component=() => make);
+let screen2 = BaseUtils.createScreen(~screenId, ~component=() => make);
 module TestScreen4 = {
   let screenId = "TestScreen4";
   [@react.component]
@@ -19,5 +19,5 @@ module TestScreen4 = {
     </SafeAreaView>;
   };
 };
-let screen3 = Utils.createScreen2(screenId, () => make);
-let screen4 = Utils.createScreen3(TestScreen4.screenId, <TestScreen4 />);
+let screen3 = BaseUtils.createScreen2(screenId, () => make);
+let screen4 = BaseUtils.createScreen3(TestScreen4.screenId, <TestScreen4 />);
