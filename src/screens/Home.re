@@ -137,4 +137,4 @@ let make = () => {
   </View>;
 };
 
-let screen = Utils.createScreenComp(`Home, () => make);
+let screen = Utils.createScreenComp("Home", () => make);

@@ -10,6 +10,6 @@ RegisterScreens.registerScreens();
 
 Navigation.onAppLaunched(() => {
   Navigation.setRoot(root)
-  |> Js.Promise.then_(_result => {Js.Promise.resolve()})
-  |> ignore
+  // |> Js.Promise.then_(_result => {Js.Promise.resolve()})
+  // |> ignore
 });

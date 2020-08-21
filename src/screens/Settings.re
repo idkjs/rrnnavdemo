@@ -20,4 +20,4 @@ let make = (~componentId as _) => {
     <Text> "Settings 👋"->React.string </Text>
   </View>;
 };
-let screen = Utils.createScreenComp(`Settings, () => make);
+let screen = Utils.createScreenComp("Settings", () => make);

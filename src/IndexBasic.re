@@ -23,20 +23,37 @@ module Home = {
   };
 };
 
-Navigation.registerComponent(`Home, () => Home.make);
-
-Navigation._registerAppLaunchedListener((.) => {
+Navigation.registerComponent("Home", () => Home.make);
+RegisterScreens.registerScreens();
+// Navigation._registerAppLaunchedListener((.) => {
+//   Navigation.setRoot(
+//     Navigation.rootOptions(
+//       ~root=
+//         Navigation.layoutStack(
+//           ~id="Home",
+//           ~children=[|HomeScreen.screen()|],
+//           (),
+//         ),
+//       (),
+//     ),
+//   )
+//   // |> Js.Promise.then_(_result => {Js.Promise.resolve()})
+//   // |> ignore
+// });
+let root =
+  Navigation.rootOptions(
+    ~root=
+      Navigation.layoutStack(
+        ~componentId="Home",
+        ~children=[|HomeScreen.screen()|],
+        (),
+      ),
+    (),
+  );
+Navigation.onAppLaunched(() => {
   Navigation.setRoot(
-    Navigation.rootOptions(
-      ~root=
-        Navigation.layoutStack(
-          ~id="Home",
-          ~children=[|HomeScreen.screen()|],
-          (),
-        ),
-      (),
-    ),
+    root,
+    // |> Js.Promise.then_(_result => {Js.Promise.resolve()})
+    // |> ignore
   )
-  |> Js.Promise.then_(_result => {Js.Promise.resolve()})
-  |> ignore
 });

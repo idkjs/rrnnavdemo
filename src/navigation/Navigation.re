@@ -1,3 +1,62 @@
+
+[@bs.deriving abstract]
+type optionsBottomTabs = {
+  [@bs.optional]
+  text: string,
+  // [@bs.optional]
+  // visible: bool,
+  // [@bs.optional]
+  // animate: bool,
+  // [@bs.optional]
+  // hideOnScroll: bool,
+  // [@bs.optional]
+  // leftButtonColor: ReactNative.Color.t,
+  // [@bs.optional]
+  // rightButtonColor: ReactNative.Color.t,
+  // [@bs.optional]
+  // leftButtonDisabledColor: ReactNative.Color.t,
+  // [@bs.optional]
+  // rightButtonDisabledColor: ReactNative.Color.t,
+  // [@bs.optional]
+  // drawBehind: bool,
+  // [@bs.optional]
+  // testID: string,
+  // [@bs.optional]
+  // title: optionsTopBarTitle,
+  // [@bs.optional]
+  // subTitle: optionsTopBarSubTitle,
+  // [@bs.optional]
+  // backButton: optionsTopBarBackButton,
+  // [@bs.optional]
+  // leftButtons: array(optionsTopBarButton),
+  // [@bs.optional]
+  // rightButtons: array(optionsTopBarButton),
+  // [@bs.optional]
+  // background: optionsTopBarBackground,
+  // [@bs.optional]
+  // barStyle: string,
+  // [@bs.optional]
+  // noBorder: bool,
+  // [@bs.optional]
+  // searchBar: bool,
+  // [@bs.optional]
+  // searchBarHiddenWhenScrolling: bool,
+  // [@bs.optional]
+  // hideNavBarOnFocusSearchBar: bool,
+  // [@bs.optional]
+  // largeTitle: optionsLargeTitle,
+  // [@bs.optional]
+  // height: androidDensityNumber,
+  // [@bs.optional]
+  // borderColor: ReactNative.Color.t,
+  // [@bs.optional]
+  // borderHeight: androidDensityNumber,
+  // [@bs.optional]
+  // elevation: androidDensityNumber,
+  // [@bs.optional]
+  // topMargin: float,
+};
+
 type props('a) = 'a;
 
 [@bs.deriving abstract]
@@ -198,63 +257,6 @@ type optionsTopBar = {
   [@bs.optional]
   topMargin: float,
 };
-[@bs.deriving abstract]
-type optionsBottomTabs = {
-  [@bs.optional]
-  text: string,
-  // [@bs.optional]
-  // visible: bool,
-  // [@bs.optional]
-  // animate: bool,
-  // [@bs.optional]
-  // hideOnScroll: bool,
-  // [@bs.optional]
-  // leftButtonColor: ReactNative.Color.t,
-  // [@bs.optional]
-  // rightButtonColor: ReactNative.Color.t,
-  // [@bs.optional]
-  // leftButtonDisabledColor: ReactNative.Color.t,
-  // [@bs.optional]
-  // rightButtonDisabledColor: ReactNative.Color.t,
-  // [@bs.optional]
-  // drawBehind: bool,
-  // [@bs.optional]
-  // testID: string,
-  // [@bs.optional]
-  // title: optionsTopBarTitle,
-  // [@bs.optional]
-  // subTitle: optionsTopBarSubTitle,
-  // [@bs.optional]
-  // backButton: optionsTopBarBackButton,
-  // [@bs.optional]
-  // leftButtons: array(optionsTopBarButton),
-  // [@bs.optional]
-  // rightButtons: array(optionsTopBarButton),
-  // [@bs.optional]
-  // background: optionsTopBarBackground,
-  // [@bs.optional]
-  // barStyle: string,
-  // [@bs.optional]
-  // noBorder: bool,
-  // [@bs.optional]
-  // searchBar: bool,
-  // [@bs.optional]
-  // searchBarHiddenWhenScrolling: bool,
-  // [@bs.optional]
-  // hideNavBarOnFocusSearchBar: bool,
-  // [@bs.optional]
-  // largeTitle: optionsLargeTitle,
-  // [@bs.optional]
-  // height: androidDensityNumber,
-  // [@bs.optional]
-  // borderColor: ReactNative.Color.t,
-  // [@bs.optional]
-  // borderHeight: androidDensityNumber,
-  // [@bs.optional]
-  // elevation: androidDensityNumber,
-  // [@bs.optional]
-  // topMargin: float,
-};
 
 type navigationOptions;
 [@bs.obj]
@@ -288,7 +290,7 @@ type layoutStack;
 [@bs.obj]
 external layoutStack:
   (
-    ~id: string,
+    ~componentId: string,
     ~children: array(layoutStackChildren),
     ~options: navigationOptions=?,
     unit
@@ -307,9 +309,7 @@ type layout('p) = {
 external showModal: layout('a) => unit = "showModal";
 
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external pushLayout: (string, layout('a)) => unit = "push";
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external push: (string, 'a) => unit = "push";
+external push: (string, layout('a)) => unit = "push";
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
 external pushChild: (string, layoutStackChildren) => unit = "push";
 
@@ -319,24 +319,23 @@ external dismissModal: string => unit = "dismissModal";
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
 external popToRoot: string => unit = "popToRoot";
 
-type screen= [`Home | `Settings 
-| `TestScreenModule ];
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external registerComponent: (screen, 'a) => React.element =
+external registerComponent: (String.t, 'a) => React.element =
   "registerComponent";
+
 
 
 [@bs.deriving abstract]
 type layoutRoot = {
-  /**
+    /**
      * Set the root
      */
-  [@bs.optional]
-  root: layoutStack,
-  // [@bs.optional]
-  // modals?: any,
-  // [@bs.optional]
-  // overlays?: any;
+    [@bs.optional]
+    root: layoutStack,
+    // [@bs.optional]
+    // modals?: any,
+    // [@bs.optional]
+    // overlays?: any;
 };
 [@bs.deriving abstract]
 type rootOptions = {
@@ -344,8 +343,6 @@ type rootOptions = {
   root: layoutStack,
 };
 
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external setRoot: 'a => Js.Promise.t(unit) = "setRoot";
 
 type optionsModalPresentationStyle = [
   | `formSheet
@@ -372,78 +369,86 @@ module Options = {
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
 external setDefaultOptions: Options.t => unit = "setDefaultOptions";
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external setDefaultOptionsRaw: 'a => unit = "setDefaultOptions";
+external setDefaultOptionsRaw: ('a) => unit = "setDefaultOptions";
 
-// type searchBarUpdatedEvent = {
-//   text: string,
-//   isFocussed: bool,
-// };
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external setOverlayRaw: ('a) => unit = "showOverlay";
 
-// type searchBarCancelPressedEvent = {componentName: option(string)};
-// type didDisappearListenerEvent = {
-//   componentId: string,
-//   componentName: string,
-// };
-// type registerAppLaunchedCallback = unit => unit;
 
-// type searchBarUpdatedCallback = searchBarUpdatedEvent => unit;
-// type searchBarCancelPressedCallback = searchBarCancelPressedEvent => unit;
-// type didDisappearCallback = didDisappearListenerEvent => unit;
-// // type emitterSubscription = {remove: (. unit) => unit};
-// type eventSubscription = {remove: (. unit) => unit};
-// type eventRegistry = {
-//   registerSearchBarUpdatedListener:
-//     (. searchBarUpdatedCallback) => emitterSubscription,
-//   registerSearchBarCancelPressedListener:
-//     (. searchBarCancelPressedCallback) => emitterSubscription,
-//   registerComponentDidDisappearListener:
-//     (. didDisappearCallback) => emitterSubscription,
-//   registerAppLaunchedListener:
-//     (. registerAppLaunchedCallback) => emitterSubscription,
-// };
+type searchBarUpdatedEvent = {
+  text: string,
+  isFocussed: bool,
+};
 
-// [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-// external events: unit => eventRegistry = "events";
+type searchBarCancelPressedEvent = {componentName: option(string)};
+type didDisappearListenerEvent = {
+  componentId: string,
+  componentName: string,
+};
+type registerAppLaunchedCallback = unit => unit;
+
+type searchBarUpdatedCallback = searchBarUpdatedEvent => unit;
+type searchBarCancelPressedCallback = searchBarCancelPressedEvent => unit;
+type didDisappearCallback = didDisappearListenerEvent => unit;
+type emitterSubscription = {remove: (. unit) => unit};
+type eventSubscription = {remove: (. unit) => unit};
+type eventRegistry = {
+  registerSearchBarUpdatedListener:
+    (. searchBarUpdatedCallback) => emitterSubscription,
+  registerSearchBarCancelPressedListener:
+    (. searchBarCancelPressedCallback) => emitterSubscription,
+  registerComponentDidDisappearListener:
+    (. didDisappearCallback) => emitterSubscription,
+  registerAppLaunchedListener:
+    (. registerAppLaunchedCallback) => emitterSubscription,
+};
+
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external events: unit => eventRegistry = "events";
+
+
+let registerAppLaunchedListener = fn => {
+  React.useEffect(() => {
+    let subscription =
+      events().registerAppLaunchedListener(. () => {
+        fn(. )
+      });
+
+    Some(() => subscription.remove(.));
+  });
+};
+
+// type events;
+
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external registerScreenComponent:
+  (string, unit => React.component('a)) => React.element =
+  "registerComponent";
+
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external registerScreenElement: (string, React.element) => React.element =
+  "registerComponent";
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external registerScreen: (string, 'a) => React.element = "registerComponent";
+
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external setRoot: 'a => unit = "setRoot";
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external setRoot2: ('a) => Js.Promise.t(unit) = "setRoot";
+
 /* EVENTS */
 type events = (. unit) => unit;
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
 external events: unit => events = "events";
+// [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+// external events: unit => events = "events";
 
 [@bs.send]
 external _registerAppLaunchedListener: (events, unit => unit) => unit =
   "registerAppLaunchedListener";
+[@bs.send]
+external _setOverlayRaw: (events, unit => unit) => unit =
+  "setOverlay";
 
 let onAppLaunched = (f: unit => unit) =>
-  events()->_registerAppLaunchedListener(f) /* let createScreen = Utils.createScreen*/;
-
-
-// /* EVENTS */
-// type events;
-// type eventSubscription = {remove: (. unit) => unit};
-// // type eventSubscription = {remove: (. unit) => unit};
-// [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-// external events: unit => events = "events";
-// [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-// external _registerAppLaunchedListener: (. events => unit) => unit =
-//   "registerAppLaunchedListener";
-
-// let registerAppLaunchedListener = fn => {
-//   React.useEffect(() => {
-//     let subscription =
-//       _registerAppLaunchedListener(. (events) => {
-//         fn(. )
-//       });
-
-//     Some(() => subscription.remove(.));
-//   });
-// };
-// let onAppLaunched = (f: unit => unit) =>
-//   events(.)->_registerAppLaunchedListener(f);
-
-//   let registerAppLaunchedListener = fn => {
-//   React.useEffect(() => {
-//     let subscription = events().registerAppLaunchedListener(. () => {fn(.)});
-
-//     Some(() => subscription.remove(.));
-//   });
-// };
+  events()->_registerAppLaunchedListener(f) 
