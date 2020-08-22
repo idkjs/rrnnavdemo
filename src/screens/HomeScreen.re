@@ -15,6 +15,7 @@ let screen = () =>
                   ~background=optionsTopBarBackground(~color="#4d089a", ()),
                   (),
                 ),
+              ~bottomTabs=optionsBottomTabs(~text="Home", ()),
               (),
             )
           ),
@@ -23,5 +24,5 @@ let screen = () =>
   );
 
 let push = () => {
-  Navigation.pushChild("Home", screen());
+  Navigation.pushChild(id, screen());
 };

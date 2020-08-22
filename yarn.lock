@@ -1291,6 +1291,11 @@
     semver "^7.3.2"
     tsutils "^3.17.1"
 
+"@yawaramin/prometo@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@yawaramin/prometo/-/prometo-0.11.0.tgz#eb79931a3d1bd8ad8c328040ee3b6934da1d2370"
+  integrity sha512-S7O8zsjRCDTF3PsugPIxgHqxi3WrSpnZ1QmdHNpgqKmETHT2iL/4fVpn1DdxgAhSGMgPCPjWgnrJNI4n1XsCGw==
+
 abab@^2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.4.tgz#6dfa57b417ca06d21b2478f0e638302f99c2405c"
@@ -5554,6 +5559,11 @@ realpath-native@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/realpath-native/-/realpath-native-2.0.0.tgz#7377ac429b6e1fd599dc38d08ed942d0d7beb866"
   integrity sha512-v1SEYUOXXdbBZK8ZuNgO4TBjamPsiSgcFr0aP+tEKpQZK8vooEUqV6nm6Cv502mX4NF2EfsnVqtNAHG+/6Ur1Q==
+
+reason-promise@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/reason-promise/-/reason-promise-1.1.1.tgz#966133fed21e748a50ffb8839a1da04912bcf380"
+  integrity sha512-xMXDiyzTjn7t9pq9aQrkgu8CLB5DILU70oWQ+LI20YecshypUwsw37TKOvCxgoFR3vo30ucF0/iWe2BZ181/jw==
 
 reason-react-native@^0.62.3:
   version "0.62.3"

@@ -1,15 +1,15 @@
-let root = {
-  "root": {
-    component: {
-      name: "TestScreenModule",
-    },
-  },
-};
+// let root = {
+//   "root": {
+//     component: {
+//       name: "TestScreenModule",
+//     },
+//   },
+// };
 
-RegisterScreens.registerScreens();
+// RegisterScreens.register();
 
-Navigation.onAppLaunched(() => {
-  Navigation.setRoot(root)
-  // |> Js.Promise.then_(_result => {Js.Promise.resolve()})
-  // |> ignore
-});
+// Navigation.onAppLaunched(() => {
+//   Navigation.setRoot(root)
+//   // |> Js.Promise.then_(_result => {Js.Promise.resolve()})
+//   // |> ignore
+// });

@@ -52,22 +52,42 @@ let homeStack =
       (),
     )
   );
-
+let loginRoot =
+  Navigation.(
+    layoutStack(
+      ~id="Login",
+      ~children=[|LoginScreen.screen()|],
+      ~options=
+        navigationOptions(
+          ~animations=
+            optionsAnimations(
+              ~setRoot=waitForRender(~waitForRender=true, ()),
+              (),
+            ),
+          (),
+        ),
+      (),
+    )
+  );
 let homeRoot =
   Navigation.(rootOptions(~root=stackOptions(~stack=homeStack, ()), ()));
+let mainRoot =
+  Navigation.(rootOptions(~root=stackOptions(~stack=homeStack, ()), ()));
+let loginRoot =
+  Navigation.(rootOptions(~root=stackOptions(~stack=loginRoot, ()), ()));
 
 Js.log2("homeRoot", Js.Json.stringify(homeRoot->Obj.magic));
 
 RegisterScreens.registerScreens();
+
+let isLoggedIn = true;
+let isLoggedIn = false;
 let start = () => {
   setDefaultOptions();
-  // Navigation.onAppLaunched(() => setRoot()->ignore);
-  // Navigation.onAppLaunched(() => Navigation.setRootOptions(homeRoot)->ignore);
-  Navigation.onAppLaunched(()
-    =>
-      Navigation.setRootOptions(homeRoot)
-      |> Js.Promise.then_(_result => {Js.Promise.resolve()})
-      |> ignore
-    );
-  // Navigation.setRootOptions(homeRoot) |> ignore
+  Navigation.onAppLaunched(() =>
+    Navigation.setRootOptions(isLoggedIn ? mainRoot : loginRoot)
+    // Navigation.setRootOptions(loginRoot)
+    |> Js.Promise.then_(_result => {Js.Promise.resolve()})
+    |> ignore
+  );
 };

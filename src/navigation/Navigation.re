@@ -1,8 +1,13 @@
+type props('a) = 'a;
 
 [@bs.deriving abstract]
 type optionsBottomTabs = {
   [@bs.optional]
   text: string,
+  [@bs.optional]
+  fontSize: float,
+  [@bs.optional]
+  selectedFontSize: float,
   // [@bs.optional]
   // visible: bool,
   // [@bs.optional]
@@ -56,9 +61,6 @@ type optionsBottomTabs = {
   // [@bs.optional]
   // topMargin: float,
 };
-
-type props('a) = 'a;
-
 [@bs.deriving abstract]
 type waitForRender = {
   [@bs.optional]
@@ -79,11 +81,12 @@ type optionsAnimations = {
   [@bs.optional]
   dismissModal: waitForRender,
 };
-
 [@bs.deriving abstract]
 type optionsLayout = {
   [@bs.optional]
   backgroundColor: string,
+  [@bs.optional]
+  componentBackgroundColor: string,
 };
 
 type optionsTopBarTitleComponent;
@@ -115,6 +118,8 @@ type optionsTopBarTitle = {
   alignment: string,
   [@bs.optional]
   component: optionsTopBarTitleComponent,
+  [@bs.optional]
+  padLeft: bool,
 };
 type optionsTopBarSubTitle;
 type imageRequireSource;
@@ -197,7 +202,19 @@ external optionsTopBarButton:
   ) =>
   optionsTopBarButton;
 
-type optionsLargeTitle;
+[@bs.deriving abstract]
+type optionsTopBarLargeTitle = {
+  [@bs.optional]
+  visible: bool,
+  [@bs.optional]
+  fontSize: float,
+  [@bs.optional]
+  color: ReactNative.Color.t,
+  [@bs.optional]
+  fontFamily: string,
+  [@bs.optional]
+  fontWeight: string,
+};
 type androidDensityNumber = float;
 
 [@bs.deriving abstract]
@@ -245,7 +262,7 @@ type optionsTopBar = {
   [@bs.optional]
   hideNavBarOnFocusSearchBar: bool,
   [@bs.optional]
-  largeTitle: optionsLargeTitle,
+  largeTitle: optionsTopBarLargeTitle,
   [@bs.optional]
   height: androidDensityNumber,
   [@bs.optional]
@@ -256,7 +273,15 @@ type optionsTopBar = {
   elevation: androidDensityNumber,
   [@bs.optional]
   topMargin: float,
+  [@bs.optional]
+  transparent: bool,
 };
+
+type optionsOverlay;
+[@bs.obj]
+external optionsOverlay:
+  (~interceptTouchOutside: bool=?, ~handleKeyboardEvents: bool=?, unit) =>
+  optionsOverlay;
 
 type navigationOptions;
 [@bs.obj]
@@ -264,6 +289,8 @@ external navigationOptions:
   (
     ~layout: optionsLayout=?,
     ~topBar: optionsTopBar=?,
+    ~overlay: optionsOverlay=?,
+    ~animations: optionsAnimations=?,
     ~bottomTabs: optionsBottomTabs=?,
     unit
   ) =>
@@ -290,7 +317,7 @@ type layoutStack;
 [@bs.obj]
 external layoutStack:
   (
-    ~componentId: string,
+    ~id: string,
     ~children: array(layoutStackChildren),
     ~options: navigationOptions=?,
     unit
@@ -304,46 +331,15 @@ type layout('p) = {
   [@bs.optional]
   stack: layoutStack,
 };
-
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external showModal: layout('a) => unit = "showModal";
-
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external push: (string, layout('a)) => unit = "push";
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external pushChild: (string, layoutStackChildren) => unit = "push";
-
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external dismissModal: string => unit = "dismissModal";
-
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external popToRoot: string => unit = "popToRoot";
-
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external registerComponent: (String.t, 'a) => React.element =
-  "registerComponent";
-
-
-
 [@bs.deriving abstract]
-type layoutRoot = {
-    /**
-     * Set the root
-     */
-    [@bs.optional]
-    root: layoutStack,
-    // [@bs.optional]
-    // modals?: any,
-    // [@bs.optional]
-    // overlays?: any;
-};
-[@bs.deriving abstract]
-type rootOptions = {
+type optionsStack = {
   [@bs.optional]
-  root: layoutStack,
+  animations: optionsAnimations,
+  [@bs.optional]
+  layout: optionsLayout,
+  [@bs.optional]
+  topBar: optionsTopBar,
 };
-
-
 type optionsModalPresentationStyle = [
   | `formSheet
   | `pageSheet
@@ -355,25 +351,63 @@ type optionsModalPresentationStyle = [
   | `fullScreen
   | `none
 ];
-module Options = {
-  type t = {
-    // statusBar: option(optionsStatusBar),
-    // layout: option(optionsLayout),
-    modalPresentationStyle: option(optionsModalPresentationStyle),
-    animations: option(optionsAnimations),
-    // this needs to be true otherwise a memory leak happens!
-    //
-    modalInPresentation: bool,
-  };
+type optionsDefault = {
+  modalPresentationStyle: option(optionsModalPresentationStyle),
+  animations: option(optionsAnimations),
+  modalInPresentation: bool,
 };
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external setDefaultOptions: Options.t => unit = "setDefaultOptions";
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external setDefaultOptionsRaw: ('a) => unit = "setDefaultOptions";
+[@bs.deriving abstract]
+type optionsBottomTab = {
+  [@bs.optional]
+  text: string,
+  [@bs.optional]
+  fontSize: float,
+  [@bs.optional]
+  selectedFontSize: float,
+};
+[@bs.deriving abstract]
+type optionsStatusBar = {
+  [@bs.optional]
+  backgroundColor: string,
+};
+
+type defaultOptions;
+[@bs.obj]
+external defaultOptions:
+  (
+    ~statusBar: optionsStatusBar=?,
+    ~topBar: optionsTopBar=?,
+    ~bottomTab: optionsBottomTab=?,
+    unit
+  ) =>
+  defaultOptions;
 
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external setOverlayRaw: ('a) => unit = "showOverlay";
+external setDefaultOptions: defaultOptions => unit = "setDefaultOptions";
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external showOverlay: layout('a) => unit = "showOverlay";
 
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external dismissOverlay: string => unit = "dismissOverlay";
+
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external showModal: layout('a) => unit = "showModal";
+
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external pop: string => unit = "pop";
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external push: (string, layout('a)) => unit = "push";
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external pushChild: (string, layoutStackChildren) => unit = "push";
+
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external dismissModal: string => unit = "dismissModal";
+
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external dismissAllModals: unit => Promise.t(unit) = "dismissAllModals";
+
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external popToRoot: string => unit = "popToRoot";
 
 type searchBarUpdatedEvent = {
   text: string,
@@ -385,13 +419,14 @@ type didDisappearListenerEvent = {
   componentId: string,
   componentName: string,
 };
-type registerAppLaunchedCallback = unit => unit;
-
+type registerLaunchListenerEvent;
 type searchBarUpdatedCallback = searchBarUpdatedEvent => unit;
 type searchBarCancelPressedCallback = searchBarCancelPressedEvent => unit;
 type didDisappearCallback = didDisappearListenerEvent => unit;
+type registerLaunchListenerCallback = registerLaunchListenerEvent => unit;
+
 type emitterSubscription = {remove: (. unit) => unit};
-type eventSubscription = {remove: (. unit) => unit};
+
 type eventRegistry = {
   registerSearchBarUpdatedListener:
     (. searchBarUpdatedCallback) => emitterSubscription,
@@ -400,55 +435,158 @@ type eventRegistry = {
   registerComponentDidDisappearListener:
     (. didDisappearCallback) => emitterSubscription,
   registerAppLaunchedListener:
-    (. registerAppLaunchedCallback) => emitterSubscription,
+    (. registerLaunchListenerEvent) => emitterSubscription,
 };
+
+[@bs.deriving abstract]
+type stacks = {
+  [@bs.optional]
+  stack: array(layoutStack),
+};
+
+[@bs.deriving abstract]
+type bottomTabsChildren = {
+  [@bs.optional]
+  children: array(layoutStack),
+};
+[@bs.deriving abstract]
+type bottomTabsStack = {
+  [@bs.optional]
+  id: string,
+  [@bs.optional]
+  children: array(layoutStack),
+  [@bs.optional]
+  options: navigationOptions,
+};
+[@bs.deriving abstract]
+type optionsStacks = {
+  [@bs.optional]
+  stack: layoutStack,
+};
+
+[@bs.deriving abstract]
+type bottomTabs = {
+  [@bs.optional]
+  children: array(optionsStacks),
+};
+[@bs.deriving abstract]
+type bottomTabsOptions = {
+  [@bs.optional]
+  children: array(optionsStacks),
+};
+[@bs.deriving abstract]
+type stackOptions = {
+  [@bs.optional]
+  stack: layoutStack,
+  [@bs.optional]
+  bottomTabs,
+};
+[@bs.deriving abstract]
+type rootOptions = {
+  [@bs.optional]
+  root: stackOptions,
+};
+type tabSettings;
+[@bs.obj]
+external tabSettings:
+  (
+    ~id: string=?,
+    ~children: array(layoutStackChildren),
+    ~options: navigationOptions=?,
+    unit
+  ) =>
+  tabSettings;
+[@bs.deriving abstract]
+type tabSettingsStack = {
+  [@bs.optional]
+  stack: tabSettings,
+};
+type stackChild;
+[@bs.obj]
+external stackChild: (~children: array(tabSettingsStack)=?, unit) => stackChild;
+type bottomTabSettings;
+[@bs.obj]
+external bottomTabSettings:
+  (~bottomTabs: array(tabSettingsStack)=?, unit) => bottomTabSettings;
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external register: (string, 'a) => React.element = "registerComponent";
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external registerComponent: (string, 'a) => React.element =
+  "registerComponent";
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external setRoot: unit => Js.Promise.t(unit) = "setRoot";
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external setRootOptions: rootOptions => Js.Promise.t(unit) = "setRoot";
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external setRootTabs: bottomTabSettings => Js.Promise.t(unit) = "setRoot";
 
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
 external events: unit => eventRegistry = "events";
 
+[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+external mergeOptions: (string, navigationOptions) => eventRegistry =
+  "mergeOptions";
 
-let registerAppLaunchedListener = fn => {
+let useSearchBarText = () => {
+  let (searchBarText, setSearchBarText) = React.useState(_ => "");
+  React.useEffect1(
+    () => {
+      let subscription =
+        events().registerSearchBarUpdatedListener(. ({text}) => {
+          setSearchBarText(_ => text)
+        });
+      let subscription2 =
+        events().registerSearchBarCancelPressedListener(. _ => {
+          setSearchBarText(_ => "")
+        });
+
+      Some(
+        () => {
+          subscription.remove(.);
+          subscription2.remove(.);
+        },
+      );
+    },
+    [||],
+  );
+  searchBarText;
+};
+let useDidDisappear = fn => {
   React.useEffect(() => {
     let subscription =
-      events().registerAppLaunchedListener(. () => {
-        fn(. )
+      events().registerComponentDidDisappearListener(. ({componentId}) => {
+        fn(. componentId)
       });
 
     Some(() => subscription.remove(.));
   });
 };
-
+// /* EVENTS */
 // type events;
+// [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+// external events: (. unit) => events = "events";
+// [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
+// external _registerAppLaunchedListener: (. events, (. unit) => unit) => unit =
+//   "registerAppLaunchedListener";
 
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external registerScreenComponent:
-  (string, unit => React.component('a)) => React.element =
-  "registerComponent";
+// // let onAppLaunched = (f: unit => unit) =>
+// //   events()->_registerAppLaunchedListener(f)
 
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external registerScreenElement: (string, React.element) => React.element =
-  "registerComponent";
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external registerScreen: (string, 'a) => React.element = "registerComponent";
+// let onAppLaunched = fn => {
+//   React.useEffect(() => {
+//     let subscription = events(.)-> _registerAppLaunchedListener(. _ => {fn(.)});
 
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external setRoot: 'a => unit = "setRoot";
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external setRoot2: ('a) => Js.Promise.t(unit) = "setRoot";
-
+//     Some(() => subscription.remove(.));
+//   });
+// };
 /* EVENTS */
-type events = (. unit) => unit;
+type events;
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
 external events: unit => events = "events";
-// [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-// external events: unit => events = "events";
 
 [@bs.send]
 external _registerAppLaunchedListener: (events, unit => unit) => unit =
   "registerAppLaunchedListener";
-[@bs.send]
-external _setOverlayRaw: (events, unit => unit) => unit =
-  "setOverlay";
 
 let onAppLaunched = (f: unit => unit) =>
-  events()->_registerAppLaunchedListener(f) 
+  events()->_registerAppLaunchedListener(f);

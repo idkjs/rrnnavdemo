@@ -1,0 +1,111 @@
+{
+    "root": {
+        "bottomTabs": [
+            {
+                "stack": {
+                    "id": "Home",
+                    "children": [
+                        {
+                            "component": {
+                                "id": "Home",
+                                "name": "rrnnavdemoHome",
+                                "options": {
+                                    "topBar": {
+                                        "title": {
+                                            "text": "Home",
+                                            "color": "white"
+                                        },
+                                        "background": {
+                                            "color": "#4d089a"
+                                        }
+                                    },
+                                    "bottomTabs": {
+                                        "text": "Home"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "options": {
+                        "animations": {
+                            "setRoot": {
+                                "waitForRender": true
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "stack": {
+                    "id": "Settings",
+                    "children": [
+                        {
+                            "component": {
+                                "id": "Settings",
+                                "name": "rrnnavdemoSettings",
+                                "options": {
+                                    "topBar": {
+                                        "title": {
+                                            "text": "Settings",
+                                            "color": "white"
+                                        },
+                                        "background": {
+                                            "color": "#4d089a"
+                                        }
+                                    },
+                                    "bottomTabs": {
+                                        "text": "Settings"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "options": {
+                        "animations": {
+                            "setRoot": {
+                                "waitForRender": true
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}
+
+ {
+    "root": {
+        "stack": {
+            "id": "Home",
+            "children": [
+                {
+                    "component": {
+                        "id": "Home",
+                        "name": "rrnnavdemoHome",
+                        "options": {
+                            "topBar": {
+                                "title": {
+                                    "text": "Home",
+                                    "color": "white"
+                                },
+                                "background": {
+                                    "color": "#4d089a"
+                                }
+                            },
+                            "bottomTabs": {
+                                "text": "Home"
+                            }
+                        }
+                    }
+                }
+            ],
+            "options": {
+                "animations": {
+                    "setRoot": {
+                        "waitForRender": true
+                    }
+                }
+            }
+        }
+    }
+}

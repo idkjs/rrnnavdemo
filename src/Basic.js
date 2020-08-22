@@ -1,6 +1,6 @@
-const { Navigation } = require('react-native-navigation');
+const {Navigation} = require('react-native-navigation');
 const React = require('react');
-const { View, Text, StyleSheet } = require('react-native');
+const {View, Text, StyleSheet} = require('react-native');
 
 const HomeScreen = (props) => {
   return (
@@ -9,7 +9,7 @@ const HomeScreen = (props) => {
     </View>
   );
 };
-Navigation.registerComponent('Home', () => HomeScreen);
+Navigation.register('Home', () => HomeScreen);
 
 Navigation.events().registerAppLaunchedListener(async () => {
   Navigation.setRoot({
@@ -18,12 +18,12 @@ Navigation.events().registerAppLaunchedListener(async () => {
         children: [
           {
             component: {
-              name: 'Home'
-            }
-          }
-        ]
-      }
-    }
+              name: 'Home',
+            },
+          },
+        ],
+      },
+    },
   });
 });
 
@@ -32,9 +32,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'whitesmoke'
-  }
+    backgroundColor: 'whitesmoke',
+  },
 });
-
 
 export default Basic;

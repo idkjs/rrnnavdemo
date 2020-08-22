@@ -25,5 +25,5 @@ let screen = () =>
   );
 
 let push = () => {
-  Navigation.pushChild("Home", screen());
+  Navigation.pushChild(id, screen());
 };

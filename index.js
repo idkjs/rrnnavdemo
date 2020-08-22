@@ -47,8 +47,8 @@
 //   }
 // }
 
-// Navigation.registerComponent('Home', () => HomeScreen);
-// Navigation.registerComponent('Settings', () => SettingsScreen);
+// Navigation.register('Home', () => HomeScreen);
+// Navigation.register('Settings', () => SettingsScreen);
 
 // Navigation.setDefaultOptions({
 //   statusBar: {
@@ -115,10 +115,13 @@
 
 // import 'src/Index.bs';
 
-import { AppRegistry } from 'react-native';
-import App from './src/IndexBasic.bs';
-import { name as appName } from './app.json';
-import { start } from './src/Index.bs';
-
+// import {AppRegistry} from 'react-native';
+// import App from './src/IndexBasic.bs';
+// import {name as appName} from './app.json';
+// import {start} from './src/Index.bs';
+// import {start} from './src/BottomTabs.bs';
+// import {start} from './src/BottomTabs2.bs';
+import {start} from './src/LoginDemo.bs';
+// Js.log2("APPNAME",appName)
 start();
 // AppRegistry.registerComponent(appName, () => App);

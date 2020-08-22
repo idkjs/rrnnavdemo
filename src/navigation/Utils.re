@@ -1,13 +1,13 @@
 let createScreenComp = (screenId, component: unit => React.component('a)) => {
-  //   Navigation.registerComponent(HomeScreen.id, () => Home.make);
-  Navigation.registerComponent(
+  //   Navigation.register(HomeScreen.id, () => Home.make);
+  Navigation.register(
     screenId,
     component,
   );
 };
 let createScreen = (screenId, component: React.element) => {
-  //   Navigation.registerComponent(HomeScreen.id, () => Home.make);
-  Navigation.registerComponent(
+  //   Navigation.register(HomeScreen.id, () => Home.make);
+  Navigation.register(
     screenId,
     component,
   );

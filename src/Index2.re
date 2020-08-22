@@ -58,8 +58,8 @@
 // //   };
 // // };
 
-// // Navigation.registerComponent("Home", () => Home.make);
-// // Navigation.registerComponent(`Settings, () => Settings.make);
+// // Navigation.register("Home", () => Home.make);
+// // Navigation.register(`Settings, () => Settings.make);
 
 // // Navigation.setDefaultOptions({
 // //   animations: Some(animations),
@@ -78,8 +78,7 @@
 //         },
 //       },
 //     });
-
-let root = {
+let rootConfig = {
   "root": {
     bottomTabs: {
       children: [
@@ -105,6 +104,11 @@ let root = {
     },
   },
 };
+type component = {name:string};
+type children = array(component);
+
+type stack ={ children: children};
+
 // Navigation.setDefaultOptionsRaw({
 //   "root": {
 //     statusBar: {
