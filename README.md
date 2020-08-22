@@ -1,12 +1,10 @@
-# `@reason-react-native/template`
+# `@reason-react-native-navigation`
 
 [![Version](https://img.shields.io/npm/v/@reason-react-native/template.svg)](https://www.npmjs.com/@reason-react-native/template)
 [![Chat](https://img.shields.io/discord/235176658175262720.svg?logo=discord&colorb=blue)](https://reason-react-native.github.io/discord/)
 
-> React Native template for application developed in Reason.
 
-Please carefully read instructions below in order to enjoy ReasonML development
-experience.
+# Working through https://wix.github.io/react-native-navigation/docs/before-you-start/
 
 ## Setup
 

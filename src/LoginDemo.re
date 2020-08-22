@@ -71,7 +71,7 @@ let loginRoot =
   );
 let homeRoot =
   Navigation.(rootOptions(~root=stackOptions(~stack=homeStack, ()), ()));
-let mainRoot =
+let mainRoot = BottomTabs.root;
   Navigation.(rootOptions(~root=stackOptions(~stack=homeStack, ()), ()));
 let loginRoot =
   Navigation.(rootOptions(~root=stackOptions(~stack=loginRoot, ()), ()));
@@ -81,7 +81,7 @@ Js.log2("homeRoot", Js.Json.stringify(homeRoot->Obj.magic));
 RegisterScreens.registerScreens();
 
 let isLoggedIn = true;
-let isLoggedIn = false;
+// let isLoggedIn = false;
 let start = () => {
   setDefaultOptions();
   Navigation.onAppLaunched(() =>

@@ -1,4 +1,4 @@
-let id = "Home";
+let id = "HomeScreen";
 
 let screen = () =>
   Navigation.layoutStackChildren(
@@ -15,7 +15,7 @@ let screen = () =>
                   ~background=optionsTopBarBackground(~color="#4d089a", ()),
                   (),
                 ),
-              ~bottomTabs=optionsBottomTabs(~text="Home", ()),
+              ~bottomTab=optionsBottomTabs(~text="Home", ()),
               (),
             )
           ),

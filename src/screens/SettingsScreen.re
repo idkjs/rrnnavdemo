@@ -16,7 +16,7 @@ let screen = () =>
                   ~background=optionsTopBarBackground(~color="#4d089a", ()),
                   (),
                 ),
-              ~bottomTabs=optionsBottomTabs(~text="Settings", ()),
+              ~bottomTab=optionsBottomTabs(~text="Settings", ()),
               (),
             )
           ),

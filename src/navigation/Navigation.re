@@ -1,5 +1,5 @@
 type props('a) = 'a;
-
+type imageRequireSource;
 [@bs.deriving abstract]
 type optionsBottomTabs = {
   [@bs.optional]
@@ -8,6 +8,8 @@ type optionsBottomTabs = {
   fontSize: float,
   [@bs.optional]
   selectedFontSize: float,
+  [@bs.optional]
+  icon: imageRequireSource,
   // [@bs.optional]
   // visible: bool,
   // [@bs.optional]
@@ -122,7 +124,6 @@ type optionsTopBarTitle = {
   padLeft: bool,
 };
 type optionsTopBarSubTitle;
-type imageRequireSource;
 
 type optionsTopBarBackButton;
 [@bs.obj]
@@ -291,7 +292,7 @@ external navigationOptions:
     ~topBar: optionsTopBar=?,
     ~overlay: optionsOverlay=?,
     ~animations: optionsAnimations=?,
-    ~bottomTabs: optionsBottomTabs=?,
+    ~bottomTab: optionsBottomTabs=?,
     unit
   ) =>
   navigationOptions;
@@ -458,6 +459,7 @@ type bottomTabsStack = {
   [@bs.optional]
   options: navigationOptions,
 };
+
 [@bs.deriving abstract]
 type optionsStacks = {
   [@bs.optional]
@@ -480,11 +482,31 @@ type stackOptions = {
   stack: layoutStack,
   [@bs.optional]
   bottomTabs,
+
 };
 [@bs.deriving abstract]
 type rootOptions = {
   [@bs.optional]
   root: stackOptions,
+};
+[@bs.deriving abstract]
+type bottomTabsDocs = {
+  [@bs.optional]
+  id: string,
+  [@bs.optional]
+  children: array(layoutStackChildren),
+  [@bs.optional]
+  options: navigationOptions,
+};
+[@bs.deriving abstract]
+type rootBottomTabsDocs = {
+  [@bs.optional]
+  bottomTabs: bottomTabsDocs,
+};
+[@bs.deriving abstract]
+type rootTabOptions = {
+  [@bs.optional]
+  root: rootBottomTabsDocs,
 };
 type tabSettings;
 [@bs.obj]
