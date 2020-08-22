@@ -410,34 +410,34 @@ external dismissAllModals: unit => Promise.t(unit) = "dismissAllModals";
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
 external popToRoot: string => unit = "popToRoot";
 
-type searchBarUpdatedEvent = {
-  text: string,
-  isFocussed: bool,
-};
+// type searchBarUpdatedEvent = {
+//   text: string,
+//   isFocussed: bool,
+// };
 
-type searchBarCancelPressedEvent = {componentName: option(string)};
-type didDisappearListenerEvent = {
-  componentId: string,
-  componentName: string,
-};
-type registerLaunchListenerEvent;
-type searchBarUpdatedCallback = searchBarUpdatedEvent => unit;
-type searchBarCancelPressedCallback = searchBarCancelPressedEvent => unit;
-type didDisappearCallback = didDisappearListenerEvent => unit;
-type registerLaunchListenerCallback = registerLaunchListenerEvent => unit;
+// type searchBarCancelPressedEvent = {componentName: option(string)};
+// type didDisappearListenerEvent = {
+//   componentId: string,
+//   componentName: string,
+// };
+// type registerLaunchListenerEvent;
+// type searchBarUpdatedCallback = searchBarUpdatedEvent => unit;
+// type searchBarCancelPressedCallback = searchBarCancelPressedEvent => unit;
+// type didDisappearCallback = didDisappearListenerEvent => unit;
+// type registerLaunchListenerCallback = registerLaunchListenerEvent => unit;
 
-type emitterSubscription = {remove: (. unit) => unit};
+// type emitterSubscription = {remove: (. unit) => unit};
 
-type eventRegistry = {
-  registerSearchBarUpdatedListener:
-    (. searchBarUpdatedCallback) => emitterSubscription,
-  registerSearchBarCancelPressedListener:
-    (. searchBarCancelPressedCallback) => emitterSubscription,
-  registerComponentDidDisappearListener:
-    (. didDisappearCallback) => emitterSubscription,
-  registerAppLaunchedListener:
-    (. registerLaunchListenerEvent) => emitterSubscription,
-};
+// type eventRegistry = {
+//   registerSearchBarUpdatedListener:
+//     (. searchBarUpdatedCallback) => emitterSubscription,
+//   registerSearchBarCancelPressedListener:
+//     (. searchBarCancelPressedCallback) => emitterSubscription,
+//   registerComponentDidDisappearListener:
+//     (. didDisappearCallback) => emitterSubscription,
+//   registerAppLaunchedListener:
+//     (. registerLaunchListenerEvent) => emitterSubscription,
+// };
 
 [@bs.deriving abstract]
 type stacks = {
@@ -542,65 +542,6 @@ external setRootOptions: rootOptions => Js.Promise.t(unit) = "setRoot";
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
 external setRootTabs: bottomTabSettings => Js.Promise.t(unit) = "setRoot";
 
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external events: unit => eventRegistry = "events";
-
-[@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-external mergeOptions: (string, navigationOptions) => eventRegistry =
-  "mergeOptions";
-
-let useSearchBarText = () => {
-  let (searchBarText, setSearchBarText) = React.useState(_ => "");
-  React.useEffect1(
-    () => {
-      let subscription =
-        events().registerSearchBarUpdatedListener(. ({text}) => {
-          setSearchBarText(_ => text)
-        });
-      let subscription2 =
-        events().registerSearchBarCancelPressedListener(. _ => {
-          setSearchBarText(_ => "")
-        });
-
-      Some(
-        () => {
-          subscription.remove(.);
-          subscription2.remove(.);
-        },
-      );
-    },
-    [||],
-  );
-  searchBarText;
-};
-let useDidDisappear = fn => {
-  React.useEffect(() => {
-    let subscription =
-      events().registerComponentDidDisappearListener(. ({componentId}) => {
-        fn(. componentId)
-      });
-
-    Some(() => subscription.remove(.));
-  });
-};
-// /* EVENTS */
-// type events;
-// [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-// external events: (. unit) => events = "events";
-// [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
-// external _registerAppLaunchedListener: (. events, (. unit) => unit) => unit =
-//   "registerAppLaunchedListener";
-
-// // let onAppLaunched = (f: unit => unit) =>
-// //   events()->_registerAppLaunchedListener(f)
-
-// let onAppLaunched = fn => {
-//   React.useEffect(() => {
-//     let subscription = events(.)-> _registerAppLaunchedListener(. _ => {fn(.)});
-
-//     Some(() => subscription.remove(.));
-//   });
-// };
 /* EVENTS */
 type events;
 [@bs.module "react-native-navigation"] [@bs.scope "Navigation"]
