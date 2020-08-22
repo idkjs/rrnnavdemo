@@ -53,21 +53,21 @@ let homeStack =
     )
   );
 
-let homeRoot =
-  Navigation.(rootOptions(~root=stackOptions(~stack=homeStack, ()), ()));
+// let homeRoot =
+//   Navigation.(rootOptions(~root=stackOptions(~stack=homeStack, ()), ()));
 
-Js.log2("homeRoot", Js.Json.stringify(homeRoot->Obj.magic));
+// Js.log2("homeRoot", Js.Json.stringify(homeRoot->Obj.magic));
 
-RegisterScreens.registerScreens();
-let start = () => {
-  setDefaultOptions();
-  // Navigation.onAppLaunched(() => setRoot()->ignore);
-  // Navigation.onAppLaunched(() => Navigation.setRootOptions(homeRoot)->ignore);
-  Navigation.onAppLaunched(()
-    =>
-      Navigation.setRootOptions(homeRoot)
-      |> Js.Promise.then_(_result => {Js.Promise.resolve()})
-      |> ignore
-    );
-  // Navigation.setRootOptions(homeRoot) |> ignore
-};
+// RegisterScreens.registerScreens();
+// let start = () => {
+//   setDefaultOptions();
+//   // Navigation.onAppLaunched(() => setRoot()->ignore);
+//   // Navigation.onAppLaunched(() => Navigation.setRootOptions(homeRoot)->ignore);
+//   Navigation.onAppLaunched(()
+//     =>
+//       Navigation.setRootOptions(homeRoot)
+//       |> Js.Promise.then_(_result => {Js.Promise.resolve()})
+//       |> ignore
+//     );
+//   // Navigation.setRootOptions(homeRoot) |> ignore
+// };
